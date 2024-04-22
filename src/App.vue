@@ -191,6 +191,8 @@
 <script setup>
   import axios from 'axios';
   import { ref } from 'vue';
+
+  const api = 'https://subway-backend-aeemgczutg.cn-hangzhou.fcapp.run'
   const data = ref([]);
   const station_from = ref('');
   const station_to = ref('');
@@ -251,12 +253,12 @@
   }
 
   async function fetch() {
-    const response = await axios.get('http://127.0.0.1:8080/fetch');
+    const response = await axios.get(api + '/fetch');
     data.value = response.data;
   }
 
   async function fetchLine() {
-    const response = await axios.get('http://127.0.0.1:8080/fetchLine');
+    const response = await axios.get(api + '/fetchLine');
     lineData.value = response.data;
   }
 
@@ -266,7 +268,7 @@
       station_from: station_from.value,
       station_to: station_to.value
     };
-    const response = await axios.get('http://127.0.0.1:8080/query', {
+    const response = await axios.get(api + '/query', {
       params
     });
     pathData.value = response.data;
@@ -289,7 +291,7 @@
   }
 
   async function deleteLine() {
-    const response = await axios.post('http://127.0.0.1:8080/deleteLine', {
+    const response = await axios.post(api + '/deleteLine', {
       line: removedLine.value
     });
     if (response.data.msg == 'ok') {
@@ -319,7 +321,7 @@
       stations.push(stationsInfo.value[i].name);
     }
 
-    const response = await axios.post('http://127.0.0.1:8080/addLine', {
+    const response = await axios.post(api + '/addLine', {
       name: lineName.value,
       speed: lineSpeed.value,
       distances: distances,
@@ -339,7 +341,7 @@
   }
 
   async function reload() {
-    const response = await axios.get('http://127.0.0.1:8080/reload');
+    const response = await axios.get(api + '/reload');
     if (response.data.msg == 'ok') {
       fetch();
       fetchLine();
