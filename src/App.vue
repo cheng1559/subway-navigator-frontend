@@ -281,7 +281,7 @@
     }
     time.value = formatTime(pathData.value[pathData.value.length - 1].time);
     transfer.value = pathData.value[pathData.value.length - 1].transfer;
-    pass.value = pathData.value.length - transfer.value - 3;
+    pass.value = Math.max(pathData.value.length - transfer.value - 3, 0);
   }
 
   async function invert() {
