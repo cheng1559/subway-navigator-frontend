@@ -16,12 +16,12 @@
 
 ### 本地部署
 
-1. 安装 18.20.2 以上版本的 [`Node.js`](https://nodejs.org/)；
+1. 安装 18.20.2 以上版本的 [Node.js](https://nodejs.org/)；
 
 2. 克隆该仓库到本地：
 
     ```
-    git clone https://github.com/cheng1559/subway-navigator-frontend.git && cd./subway-navigator-frontend
+    git clone https://github.com/cheng1559/subway-navigator-frontend.git && cd ./subway-navigator-frontend
     ```
 
 3. 安装依赖项：
