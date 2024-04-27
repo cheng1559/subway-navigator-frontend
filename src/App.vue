@@ -3,6 +3,7 @@
     <div class="flex items-center justify-center bg-[#2148C0] dark:bg-gray-800 h-32 min-h-32 transition-colors">
 
       <h1 class="text-lg font-bold text-white"> 出发车站： </h1>
+
       <select class="select select-bordered w-36 max-w-xs mr-5" v-model="station_from" @change="query">
         <option disabled selected>请选择出发车站</option>
         <option v-for="(item, index) in data" :key="index">{{item}}</option>
@@ -185,15 +186,16 @@
       </form>
     </dialog>
   </div>
-
 </template>
 
 <script setup>
   import axios from 'axios';
   import { ref } from 'vue';
 
-  const api = 'https://subway-backend-aeemgczutg.cn-hangzhou.fcapp.run'
+  axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
+
   const data = ref([]);
+
   const station_from = ref('');
   const station_to = ref('');
   const pathData = ref([]);
@@ -238,9 +240,8 @@
   lineDataInit();
 
   function formatTime(seconds) {
-    if (seconds == null) {
-      return '';
-    }
+    if (seconds == null) return '';
+
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const remainingSeconds = Math.floor(seconds % 60);
@@ -253,12 +254,12 @@
   }
 
   async function fetch() {
-    const response = await axios.get(api + '/fetch');
+    const response = await axios.get('/fetch');
     data.value = response.data;
   }
 
   async function fetchLine() {
-    const response = await axios.get(api + '/fetchLine');
+    const response = await axios.get('/fetchLine');
     lineData.value = response.data;
   }
 
@@ -268,7 +269,7 @@
       station_from: station_from.value,
       station_to: station_to.value
     };
-    const response = await axios.get(api + '/query', {
+    const response = await axios.get('/query', {
       params
     });
     pathData.value = response.data;
@@ -291,7 +292,7 @@
   }
 
   async function deleteLine() {
-    const response = await axios.post(api + '/deleteLine', {
+    const response = await axios.post('/deleteLine', {
       line: removedLine.value
     });
     if (response.data.msg == 'ok') {
@@ -321,7 +322,7 @@
       stations.push(stationsInfo.value[i].name);
     }
 
-    const response = await axios.post(api + '/addLine', {
+    const response = await axios.post('/addLine', {
       name: lineName.value,
       speed: lineSpeed.value,
       distances: distances,
@@ -341,7 +342,7 @@
   }
 
   async function reload() {
-    const response = await axios.get(api + '/reload');
+    const response = await axios.get('/reload');
     if (response.data.msg == 'ok') {
       fetch();
       fetchLine();
@@ -373,7 +374,3 @@
 
   fetch();
 </script>
-
-<style>
-
-</style>
