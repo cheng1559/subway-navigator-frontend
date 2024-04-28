@@ -233,7 +233,7 @@
 
 <script setup>
   import axios from 'axios';
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
 
   axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
 
@@ -264,9 +264,12 @@
 
   const errorInfo = ref('');
   const audioPlayer = ref(null);
+
+  let isPause = false;
   
   function changePlay() {
-    audioPlayer.value.paused ? audioPlayer.value.play() : audioPlayer.value.pause();
+    isPause = !isPause;
+    isPause ? audioPlayer.value.pause() : audioPlayer.value.play();
   }
 
   function lineDataInit() {
@@ -421,5 +424,7 @@
     }
   }
 
-  fetch();
+  onMounted(() => {
+    fetch();
+  });
 </script>
