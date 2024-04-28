@@ -1,7 +1,8 @@
 <template>
   <div class="flex flex-col h-screen w-screen">
+    <audio ref="audioPlayer" src="/bgm.mp3" autoplay loop></audio>
+    <div class="fixed right-2 bottom-2 text-lg opacity-60"> BY 2022213665 胡诚成 🍊 </div>
 
-    <div class="fixed right-5 bottom-5 text-2xl opacity-60"> BY 2022213665 胡诚成 🍊</div>
     <div class="flex items-center justify-center bg-[#2148C0] dark:bg-gray-800 h-32 min-h-32 transition-colors">
 
       <h1 class="text-lg font-bold text-white"> 出发车站： </h1>
@@ -33,11 +34,30 @@
       <button class="btn text-lg mr-5" @click="remove_line.showModal(), fetchLine()">删除线路</button>
       <button class="btn text-lg mr-5" @click="confirm.showModal()">重新载入</button>
 
-      <label class="swap swap-rotate hover:bg-gray-100 dark:hover:bg-gray-800 text-white dark:hover:text-gray-200 hover:text-gray-700 transition-all w-10 h-10 rounded-full hover:scale-110 absolute right-0 mr-5">
-        <input type="checkbox" class="theme-controller" value="synthwave" :checked="isDark" @change="toggleDark"/>
-        <svg class="swap-off fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
-        <svg class="swap-on fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
-      </label>
+      <div class="absolute flex flex-col right-0 mr-5 space-y-2">
+        <label class="swap swap-rotate hover:bg-gray-100 dark:hover:bg-gray-800 text-white dark:hover:text-gray-200 hover:text-gray-700 transition-all w-10 h-10 rounded-full hover:scale-110">
+          <input type="checkbox" class="theme-controller" value="synthwave" :checked="isDark" @change="toggleDark"/>
+          <svg class="swap-off fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
+          <svg class="swap-on fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
+        </label>
+        <div class="dropdown dropdown-hover dropdown-bottom dropdown-end">
+          <label class="swap hover:bg-gray-100 dark:hover:bg-gray-800 text-white dark:hover:text-gray-200 hover:text-gray-700 transition-all w-10 h-10 rounded-full hover:scale-110">
+            <input type="checkbox" class="theme-controller" value="synthwave" @change="changePlay"/>
+            <svg class="swap-off w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
+            </svg>
+            <svg class="swap-on w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
+            </svg>
+          </label>
+          <div class="dropdown-content marker:text-2xl opacity-60 w-72 bg-base-100 mt-2 p-4 shadow rounded-box z-10 border">
+            <div class="text-xl font-bold pb-2"> 音乐：《北京地铁查询系统》 </div>
+            <div class="text-md"> 作词：宋华南 </div>
+            <div class="text-md"> 作曲、编曲：Suno </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="flex-1 flex overflow-y-hidden">
@@ -45,9 +65,9 @@
         <img src="@/assets/image.png" class="h-full"/>
       </div>
       
-      <div class="flex-1 p-5 flex flex-col">
-        <h1 class="font-medium text-xl" v-if="pathData.length > 1"> 用时 {{ time }}，途径 {{ pass }} 站，换乘 {{ transfer }} 次</h1>
-        <ul class="timeline timeline-vertical overflow-y-auto w-full max-w-full">
+      <div class="flex-1 p-5 flex flex-col pb-10">
+        <ul class="timeline timeline-vertical overflow-y-auto w-full max-w-full flex-1 border rounded-lg shadow-lg p-4">
+          <h1 class="font-medium text-xl mb-2" v-if="pathData.length > 1"> 用时 {{ time }}，途径 {{ pass }} 站，换乘 {{ transfer }} 次</h1>
           <li v-for="(item, index) in pathData" :key="index">
             <hr v-if="index != 0"/>
             <div class="timeline-start" v-if="!item.isTransfer">{{formatTime(item.time)}}</div>
@@ -222,6 +242,11 @@
   const stationsInfo = ref([]);
 
   const errorInfo = ref('');
+  const audioPlayer = ref(null);
+  
+  function changePlay() {
+    audioPlayer.value.paused ? audioPlayer.value.play() : audioPlayer.value.pause();
+  }
 
   function lineDataInit() {
     errorInfo.value = '';
@@ -266,6 +291,7 @@
   }
 
   async function query() {
+    audioPlayer.value.play();
     const params = {
       type: query_type.value,
       station_from: station_from.value,
