@@ -53,7 +53,28 @@
           <div class="dropdown-content marker:text-2xl opacity-60 w-72 bg-base-100 mt-2 p-4 shadow rounded-box z-10 border">
             <div class="text-xl font-bold pb-2"> 音乐：《北京地铁查询系统》 </div>
             <div class="text-md"> 作词：宋华南 </div>
-            <div class="text-md"> 作曲、编曲：Suno </div>
+            <div class="text-md mb-2"> 作曲、编曲：Suno </div>
+            <div>
+              起点终点站选择一下<br>
+              有人追求最短时间<br>
+              有人想要最少换乘次数<br>
+              我们提供两种决策<br>
+              <br>
+              编辑功能很实用<br>
+              添加或删除线路随心愿<br>
+              中途换乘站5分钟<br>
+              地铁每站停留1分钟<br>
+              <br>
+              来吧，选择你的决策<br>
+              最短时间或最少换乘次数<br>
+              我们的查询系统帮你解决<br>
+              北京地铁，畅通无阻<br>
+              <br>
+              来吧，选择你的决策<br>
+              最短时间或最少换乘次数<br>
+              我们的查询系统帮你解决<br>
+              北京地铁，畅通无阻<br>
+            </div>
           </div>
         </div>
       </div>
